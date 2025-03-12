@@ -141,6 +141,9 @@
 			<response value = '1'>Yes</response>
 			<response value = '2'>No</response>
 		</responses>
+		<preskip>
+			<skip fieldname='age_check' condition = '&lt;&gt;' response='1' response_type='fixed' skiptofieldname ='eligibility_check1'></skip>
+		</preskip>
 	</question>
 
 
@@ -150,6 +153,9 @@
 			<response value = '1'>Yes</response>
 			<response value = '2'>No</response>
 		</responses>
+		<preskip>
+			<skip fieldname='stay_3_months' condition = '&lt;&gt;' response='1' response_type='fixed' skiptofieldname ='eligibility_check1'></skip>
+		</preskip>
 	</question>
 
 
@@ -159,6 +165,9 @@
 			<response value = '1'>Yes</response>
 			<response value = '2'>No</response>
 		</responses>
+		<preskip>
+			<skip fieldname='negative_hiv' condition = '&lt;&gt;' response='1' response_type='fixed' skiptofieldname ='eligibility_check1'></skip>
+		</preskip>
 	</question>
 
 
@@ -168,6 +177,9 @@
 			<response value = '1'>Yes</response>
 			<response value = '2'>No</response>
 		</responses>
+		<preskip>
+			<skip fieldname='mobile_phone' condition = '&lt;&gt;' response='1' response_type='fixed' skiptofieldname ='eligibility_check1'></skip>
+		</preskip>
 	</question>
 
 
