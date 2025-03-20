@@ -7,6 +7,8 @@
 
 Imports System.Configuration
 Imports System.Data.OleDb
+Imports System.Globalization
+Imports System.Web.UI.WebControls.Expressions
 
 
 Module AutomaticVariables
@@ -165,7 +167,13 @@ Module AutomaticVariables
                     End If
 
                 Case Is = "preferred_language_text"
-                    Dim preferred_language As String = GetValue("preferred_language")
+                    Dim country As Integer = CInt(GetValue("countrycode"))
+
+                    Dim preferred_language As String = GetValue("preferred_language_ke")
+                    If country = 1 Then
+                        preferred_language = GetValue("preferred_language_ug")
+                    End If
+
                     Select Case preferred_language
                         Case Is = "1"
                             CurrentAutoValue = "DHOLUO"
@@ -177,13 +185,132 @@ Module AutomaticVariables
                             CurrentAutoValue = "RUNYONKOLE"
                         Case Is = "5"
                             CurrentAutoValue = "LUGANDA"
-                        Case Is = "6"
+                        Case Is = "97"
                             CurrentAutoValue = "OTHER"
                         Case Is = "7"
                             CurrentAutoValue = "NONE"
                         Case Else
                             CurrentAutoValue = "ENGLISH"
                     End Select
+
+                Case Is = "preferred_language"
+                    Dim country As Integer = CInt(GetValue("countrycode"))
+
+                    Dim preferred_language As String = GetValue("preferred_language_ke")
+                    If country = 1 Then
+                        preferred_language = GetValue("preferred_language_ug")
+                    End If
+
+                    CurrentAutoValue = preferred_language
+
+
+                Case Is = "health_facility"
+                    Dim country As Integer = CInt(GetValue("countrycode"))
+
+                    Dim health_facility As String = GetValue("health_facility_ke")
+                    If country = 1 Then
+                        health_facility = GetValue("health_facility_ug")
+                    End If
+                    CurrentAutoValue = CInt(health_facility)
+
+                Case Is = "next_appt_3m"
+                    'VDATE = GetValue("starttime")
+
+                    '' Parse the string to DateTime
+                    'Dim visit_date As DateTime = DateTime.ParseExact(VDATE, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+
+                    '' Add 3 months
+                    'Dim newDate As DateTime = visit_date.AddMonths(3)
+
+                    '' Convert back to string in the same format
+                    'CurrentAutoValue = newDate.ToString("dd/MM/yyyy")
+                    Try
+                        VDATE = GetValue("starttime")
+
+                        ' Try to parse with full date/time format
+                        Dim visit_date As DateTime
+
+                        ' First attempt with full format
+                        If DateTime.TryParseExact(VDATE, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            Globalization.DateTimeStyles.None, visit_date) Then
+                            ' Success with full format
+
+                            ' Second attempt with date only format
+                        ElseIf DateTime.TryParseExact(VDATE, "dd/MM/yyyy",
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                Globalization.DateTimeStyles.None, visit_date) Then
+                            ' Success with date only format
+
+                            ' Third attempt with generic parsing (culture dependent)
+                        ElseIf DateTime.TryParse(VDATE, visit_date) Then
+                            ' Success with generic parsing
+
+                        Else
+                            ' If all parsing attempts fail
+                            ' Log the error
+                            Console.WriteLine("Could not parse date: " & VDATE)
+                            ' Set a default value or throw exception based on your requirements
+                            visit_date = DateTime.Now ' Default to current date/time
+                        End If
+
+                        ' Add 3 months
+                        Dim newDate As DateTime = visit_date.AddMonths(3)
+
+                        ' Convert back to string in the desired format
+                        CurrentAutoValue = newDate.ToString("dd/MM/yyyy")
+
+                    Catch ex As Exception
+                        ' Handle any other exceptions
+                        ' Set a default value or rethrow based on requirements
+                        CurrentAutoValue = DateTime.Now.AddMonths(3).ToString("dd/MM/yyyy")
+                        ' Alternatively: Throw
+                    End Try
+
+
+                Case Is = "next_appt_6m"
+                    Try
+                        VDATE = GetValue("starttime")
+
+                        ' Try to parse with full date/time format
+                        Dim visit_date As DateTime
+
+                        ' First attempt with full format
+                        If DateTime.TryParseExact(VDATE, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            Globalization.DateTimeStyles.None, visit_date) Then
+                            ' Success with full format
+
+                            ' Second attempt with date only format
+                        ElseIf DateTime.TryParseExact(VDATE, "dd/MM/yyyy",
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                Globalization.DateTimeStyles.None, visit_date) Then
+                            ' Success with date only format
+
+                            ' Third attempt with generic parsing (culture dependent)
+                        ElseIf DateTime.TryParse(VDATE, visit_date) Then
+                            ' Success with generic parsing
+
+                        Else
+                            ' If all parsing attempts fail
+                            ' Log the error
+                            Console.WriteLine("Could not parse date: " & VDATE)
+                            ' Set a default value or throw exception based on your requirements
+                            visit_date = DateTime.Now ' Default to current date/time
+                        End If
+
+                        ' Add 3 months
+                        Dim newDate As DateTime = visit_date.AddMonths(6)
+
+                        ' Convert back to string in the desired format
+                        CurrentAutoValue = newDate.ToString("dd/MM/yyyy")
+
+                    Catch ex As Exception
+                        ' Handle any other exceptions
+                        ' Set a default value or rethrow based on requirements
+                        CurrentAutoValue = DateTime.Now.AddMonths(6).ToString("dd/MM/yyyy")
+                        ' Alternatively: Throw
+                    End Try
 
             End Select
         Catch ex As Exception
