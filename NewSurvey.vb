@@ -2630,7 +2630,7 @@ Public Class NewSurvey
 
                 ' Load the evatar video
                 ' Call the function to get the correct video
-                If GetValue("eligibility_check") = 1 And RandArmText <> "Default appointment" Then
+                If GetValue("eligibility_check") = 1 Then
                     video_name = getRandVideo(CInt(GetValue("client_sex")), CInt(GetValue("respondants_age")), RandArmText, language)
                     videoPath = "C:\IBIS_pilot\rand_video\" & video_name
                 End If

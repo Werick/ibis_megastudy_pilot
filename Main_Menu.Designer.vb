@@ -71,7 +71,6 @@ Partial Class Main_Menu
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ButtonCannotFind = New System.Windows.Forms.Button()
-        Me.ButtonFollowupSurvey = New System.Windows.Forms.Button()
         Me.ComboBoxMonthOfBirth = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ButtonSearchPhone = New System.Windows.Forms.Button()
@@ -80,6 +79,8 @@ Partial Class Main_Menu
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ComboBoxName = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ButtonFollowupSurvey = New System.Windows.Forms.Button()
+        Me.ButtonBackupDB = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -304,7 +305,7 @@ Partial Class Main_Menu
         Me.ButtonSMSSchedule.BackColor = System.Drawing.Color.LightGray
         Me.ButtonSMSSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonSMSSchedule.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonSMSSchedule.Location = New System.Drawing.Point(292, 596)
+        Me.ButtonSMSSchedule.Location = New System.Drawing.Point(292, 550)
         Me.ButtonSMSSchedule.Name = "ButtonSMSSchedule"
         Me.ButtonSMSSchedule.Size = New System.Drawing.Size(263, 56)
         Me.ButtonSMSSchedule.TabIndex = 28
@@ -442,19 +443,6 @@ Partial Class Main_Menu
         Me.ButtonCannotFind.Text = "Cannot Find Participant"
         Me.ButtonCannotFind.UseVisualStyleBackColor = False
         '
-        'ButtonFollowupSurvey
-        '
-        Me.ButtonFollowupSurvey.BackColor = System.Drawing.Color.LightGray
-        Me.ButtonFollowupSurvey.Enabled = False
-        Me.ButtonFollowupSurvey.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonFollowupSurvey.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonFollowupSurvey.Location = New System.Drawing.Point(292, 731)
-        Me.ButtonFollowupSurvey.Name = "ButtonFollowupSurvey"
-        Me.ButtonFollowupSurvey.Size = New System.Drawing.Size(263, 110)
-        Me.ButtonFollowupSurvey.TabIndex = 51
-        Me.ButtonFollowupSurvey.Text = "Followup Survey"
-        Me.ButtonFollowupSurvey.UseVisualStyleBackColor = False
-        '
         'ComboBoxMonthOfBirth
         '
         Me.ComboBoxMonthOfBirth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -535,6 +523,31 @@ Partial Class Main_Menu
         Me.Label8.TabIndex = 153
         Me.Label8.Text = "Name:"
         '
+        'ButtonFollowupSurvey
+        '
+        Me.ButtonFollowupSurvey.BackColor = System.Drawing.Color.LightGray
+        Me.ButtonFollowupSurvey.Enabled = False
+        Me.ButtonFollowupSurvey.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonFollowupSurvey.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonFollowupSurvey.Location = New System.Drawing.Point(292, 622)
+        Me.ButtonFollowupSurvey.Name = "ButtonFollowupSurvey"
+        Me.ButtonFollowupSurvey.Size = New System.Drawing.Size(263, 110)
+        Me.ButtonFollowupSurvey.TabIndex = 51
+        Me.ButtonFollowupSurvey.Text = "Followup Survey"
+        Me.ButtonFollowupSurvey.UseVisualStyleBackColor = False
+        '
+        'ButtonBackupDB
+        '
+        Me.ButtonBackupDB.BackColor = System.Drawing.Color.LightGray
+        Me.ButtonBackupDB.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonBackupDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonBackupDB.Location = New System.Drawing.Point(292, 768)
+        Me.ButtonBackupDB.Name = "ButtonBackupDB"
+        Me.ButtonBackupDB.Size = New System.Drawing.Size(263, 56)
+        Me.ButtonBackupDB.TabIndex = 52
+        Me.ButtonBackupDB.Text = "Backup Database"
+        Me.ButtonBackupDB.UseVisualStyleBackColor = False
+        '
         'Main_Menu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -542,6 +555,7 @@ Partial Class Main_Menu
         Me.BackColor = System.Drawing.Color.Silver
         Me.ClientSize = New System.Drawing.Size(1268, 962)
         Me.ControlBox = False
+        Me.Controls.Add(Me.ButtonBackupDB)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ButtonFollowupSurvey)
         Me.Controls.Add(Me.Label6)
@@ -627,4 +641,5 @@ Partial Class Main_Menu
     Friend WithEvents ComboBoxMonthOfBirth As ComboBox
     Friend WithEvents ButtonCannotFind As Button
     Friend WithEvents ButtonFollowupSurvey As Button
+    Friend WithEvents ButtonBackupDB As Button
 End Class

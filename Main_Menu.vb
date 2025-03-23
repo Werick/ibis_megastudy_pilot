@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Data.OleDb
+Imports System.Net
 
 Public Class Main_Menu
     'Private originalNamesTable As DataTable
@@ -575,6 +576,60 @@ Public Class Main_Menu
         Return phoneNumber.Length = 10 AndAlso phoneNumber.StartsWith("0") AndAlso IsNumeric(phoneNumber)
     End Function
 
+    Private Sub ButtonBackupDB_Click(sender As Object, e As EventArgs) Handles ButtonBackupDB.Click
+        Cursor = Cursors.WaitCursor
+        Application.DoEvents()
+        Try
+            If CheckForInternetConnection() = True Then
+                ' Set the path to the Python interpreter
+                Dim pythonPath As String = GetPythonPath()
 
+                ' Set the path to the Python script
+                Dim scriptPath As String = "C:\IBIS_pilot\Scripts\upload_to_ftp_server_IBIS.py"
+                ' Use the Shell function to execute the command
+                Shell(pythonPath & " " & scriptPath, vbNormalFocus, True)
+
+            Else
+                MsgBox("You are not connected to the Internet. Please connect to the Internet and try again.")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    ' Get Python Path
+    Private Function GetPythonPath() As String
+        Dim ConnectionString As OleDbConnection = GetDBConnection()
+        ' Set the path to the Python interpreter
+        Dim pythonPath As String = ""
+        ConnectionString.Open()
+        Dim strSQL As String = "select pythonpath from config"
+        Dim daPP As New OleDbDataAdapter(strSQL, ConnectionString)
+        Dim dsPP As New DataSet
+        daPP.Fill(dsPP)
+        For Each row As DataRow In dsPP.Tables(0).Rows
+            pythonPath = row.Item("pythonpath")
+        Next
+        daPP.Dispose()
+        dsPP.Dispose()
+
+        ConnectionString.Close()
+
+        Return pythonPath
+    End Function
+
+    Public Shared Function CheckForInternetConnection() As Boolean
+        Try
+            Using client = New WebClient()
+                Using stream = client.OpenRead("http://www.google.com")
+                    Return True
+                End Using
+            End Using
+        Catch
+            Return False
+        End Try
+    End Function
 End Class
 

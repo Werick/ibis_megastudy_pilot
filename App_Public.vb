@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Data.OleDb
+Imports System.Net
 
 Module IBIS_Public
 
@@ -187,5 +188,17 @@ Module IBIS_Public
         Return GetNextLineNum(tabletnum, strSQL, "subjid")
     End Function
 
+
+
+    Public Function GetDBConnection() As OleDbConnection
+        Try
+            Dim config As Configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+            Dim section As ConnectionStringsSection = DirectCast(config.GetSection("connectionStrings"), ConnectionStringsSection)
+            Return New OleDbConnection(section.ConnectionStrings("ConnString").ConnectionString)
+        Catch ex As Exception
+            MessageBox.Show("Error retrieving database connection: " & ex.Message)
+            Return Nothing
+        End Try
+    End Function
 
 End Module
