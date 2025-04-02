@@ -622,6 +622,9 @@ Interviewer Note: If the participant indicated that they have someone else who c
 			<response value = '4'>12-24 Months Ago</response>
 			<response value = '5'>More Than 2 Years Ago</response>
 		</responses>
+		<preskip>
+			<skip fieldname='hiv_test_history' condition = '&lt;&gt;' response='1' response_type='fixed' skiptofieldname ='heard_about_art'></skip>
+		</preskip>
 	</question>
 
 
